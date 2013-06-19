@@ -21,6 +21,8 @@ var disable_download_popup_sel = function(selector){
 	});
 }
 disable_download_popup();
-$('body').bind("DOMSubtreeModified", function() {
-    disable_download_popup();
+var b = document.getElementsByTagName('body')[0];
+var observer = new window.MutationObserver(function(mutationRecord, observer){
+	disable_download_popup();
 });
+observer.observe(b, {childList:true, subtree:true});
