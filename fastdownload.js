@@ -8,7 +8,8 @@ var disable_download_popup_sel = function(selector){
 	$.each(links, function(){
 		var obj = $(this);
 		var data = obj.attr('onclick');
-		if(!data || !data.length || !data.match(/^openDialog_hWin/))return;
+		console.log(data);
+		if(!data || !data.length || !data.match(/AttachMediaId/))return;
 		var id_regex = /(\=[a-z0-9\-]+)/;
 		var ids = ['AttachMediaId', 'CourseId'];
 		var url = 'common_get_content_media_attach_file.ashx?StudyLog=1';
