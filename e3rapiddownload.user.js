@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name NCTU e3 Rapid Download
 // @description Get rid of annoying download popup in e3 system
-// @version 1.2.1.0
+// @version 1.3.0.1
 // @namespace http://spiderpowa.com
 // @include http://e3.nctu.edu.tw/NCTU_EASY_E3P/LMS2/stu_materials_document_list.aspx*
 // @include http://e3.nctu.edu.tw/NCTU_EASY_E3P/LMS2/stu_course_index.aspx*
@@ -21,7 +21,8 @@ var disable_download_popup_sel = function(selector){
 	$.each(links, function(){
 		var obj = $(this);
 		var data = obj.attr('onclick');
-		if(!data || !data.length || !data.match(/^openDialog_hWin/))return;
+		console.log(data);
+		if(!data || !data.length || !data.match(/AttachMediaId/))return;
 		var id_regex = /(\=[a-z0-9\-]+)/;
 		var ids = ['AttachMediaId', 'CourseId'];
 		var url = 'common_get_content_media_attach_file.ashx?StudyLog=1';
