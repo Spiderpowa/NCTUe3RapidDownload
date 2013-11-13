@@ -10,11 +10,11 @@ var disable_download_popup_sel = function(selector){
 		var data = obj.attr('onclick');
 		console.log(data);
 		if(!data || !data.length || !data.match(/AttachMediaId/))return;
-		var id_regex = /(\=[a-z0-9\-]+)/;
+		var id_regex = /\=[a-z0-9\-]+/gi;
 		var ids = ['AttachMediaId', 'CourseId'];
 		var url = 'common_get_content_media_attach_file.ashx?StudyLog=1';
 		for(var i=0; i<ids.length; ++i){
-			var extract_id = id_regex.exec(data)[1];
+			var extract_id = id_regex.exec(data);
 			url += '&' + ids[i] + extract_id;
 		}
 		obj.attr('href', url);
