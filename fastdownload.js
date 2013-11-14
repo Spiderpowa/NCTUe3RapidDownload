@@ -8,19 +8,18 @@ var disable_download_popup_sel = function(selector){
 	$.each(links, function(){
 		var obj = $(this);
 		var data = obj.attr('onclick');
-		console.log(data);
+		//console.log(data);
 		if(!data || !data.length || !data.match(/AttachMediaId/))return;
-		var id_regex =  /(AttachMediaId|CourseId)(\=[a-z0-9\-]+)/gi;
 		var ids = ['AttachMediaId', 'CourseId'];
 		var url = 'common_get_content_media_attach_file.ashx?StudyLog=1';
 		for(var i=0; i<ids.length; ++i){
-			var extract_id = id_regex.exec(data)[2];
-			url += '&' + ids[i] + extract_id;
+      var id_regex = new RegExp('(' + ids[i] + '\=[a-z0-9\-]+)', 'gi');
+      var extract_param = id_regex.exec(data)[1];
+			url += '&' + extract_param;
 		}
 		obj.attr('href', url);
 		obj.attr('onclick', null);
 
-		//console.log(obj.text())
 		var file_type_regex = /pdf$/i;
 		if( file_type_regex.exec(obj.text()) )
 		{
