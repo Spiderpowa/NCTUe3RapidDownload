@@ -27,6 +27,7 @@ var disable_download_popup_sel = function(selector){
 			$('<a>').
 				attr('href', 'http://docs.google.com/viewer?url=' + 
 					 encodeURIComponent( 'http://e3.nctu.edu.tw/NCTU_EASY_E3P/LMS2/' + url)).
+				attr('target', '_black').
 				css('margin-left', '10px').
 				append('View').
 				insertAfter(obj);
