@@ -20,13 +20,20 @@ var disable_download_popup_sel = function(selector){
 		obj.attr('href', url);
 		obj.attr('onclick', null);
 
-		var file_type_regex = /pdf$/i;
-		if( file_type_regex.exec(obj.text()) )
+		var file_type_regex = /(pptx?|docx?|xlsx?|pdf)$/i;
+		var file_type = file_type_regex.exec(obj.text());
+		if( file_type )
 		{
+			var viewer_url;
+			if( file_type[0].match(/pdf/i) )
+				viewer_url = 'http://docs.google.com/viewer?url=';
+			else
+				viewer_url = 'http://view.officeapps.live.com/op/view.aspx?src=';
+
 			$('<a>').
-				attr('href', 'http://docs.google.com/viewer?url=' + 
+				attr('href', viewer_url + 
 					 encodeURIComponent( 'http://e3.nctu.edu.tw/NCTU_EASY_E3P/LMS2/' + url)).
-				attr('target', '_black').
+				attr('target', '_viewer' + Math.floor(Math.random()*10000)).
 				css('margin-left', '10px').
 				append('View').
 				insertAfter(obj);
