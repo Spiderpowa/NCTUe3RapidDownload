@@ -10,15 +10,27 @@ var disable_download_popup_sel = function(selector){
 		var data = obj.attr('onclick');
 		console.log(data);
 		if(!data || !data.length || !data.match(/AttachMediaId/))return;
-		var id_regex = /\=[a-z0-9\-]+/gi;
+		var id_regex =  /(AttachMediaId|CourseId)(\=[a-z0-9\-]+)/gi;
 		var ids = ['AttachMediaId', 'CourseId'];
 		var url = 'common_get_content_media_attach_file.ashx?StudyLog=1';
 		for(var i=0; i<ids.length; ++i){
-			var extract_id = id_regex.exec(data);
+			var extract_id = id_regex.exec(data)[2];
 			url += '&' + ids[i] + extract_id;
 		}
 		obj.attr('href', url);
 		obj.attr('onclick', null);
+
+		//console.log(obj.text())
+		var file_type_regex = /pdf$/i;
+		if( file_type_regex.exec(obj.text()) )
+		{
+			$('<a>').
+				attr('href', 'http://docs.google.com/viewer?url=' + 
+					 encodeURIComponent( 'http://e3.nctu.edu.tw/NCTU_EASY_E3P/LMS2/' + url)).
+				css('margin-left', '10px').
+				append('View').
+				insertAfter(obj);
+		}
 	});
 }
 disable_download_popup();
