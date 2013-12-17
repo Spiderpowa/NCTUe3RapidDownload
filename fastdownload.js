@@ -20,25 +20,26 @@ var disable_download_popup_sel = function(selector){
 		obj.attr('href', url);
 		obj.attr('onclick', null);
 
-		var file_type_regex = /(pptx?|docx?|xlsx?|pdf)$/i;
-		var file_type = file_type_regex.exec(obj.text());
-		if( file_type )
-		{
-			var viewer_url;
-			if( file_type[0].match(/pdf/i) )
-				viewer_url = 'http://docs.google.com/viewer?url=';
-			else
-				viewer_url = 'http://view.officeapps.live.com/op/view.aspx?src=';
-
-			$('<a>').
-				attr('href', viewer_url + 
-					 encodeURIComponent( 'http://e3.nctu.edu.tw/NCTU_EASY_E3P/LMS2/' + url)).
-				attr('target', '_viewer' + Math.floor(Math.random()*10000)).
-				css('margin-left', '10px').
-				append('View').
-				insertAfter(obj);
-		}
+		preview_link(obj);
 	});
+}
+var preview_link = function(obj){
+  var preview_db = [
+   [/pdf$/i, 'http://docs.google.com/viewer?url='],
+   [/(pptx?|docx?|xlsx?)$/i, 'http://view.officeapps.live.com/op/view.aspx?src=']
+  ];
+  for(var i=0; i<preview_db.length; ++i){
+    var file_type = preview_db[i][0].exec(obj.text());
+    if(file_type === null)continue;
+    $('<a>').
+      attr('href', preview_db[i][1] + 
+         encodeURIComponent( 'http://e3.nctu.edu.tw/NCTU_EASY_E3P/LMS2/' + obj.attr('href'))).
+      attr('target', '_viewer' + Math.floor(Math.random()*10000)).
+      css('margin-left', '10px').
+      append('View').
+      insertAfter(obj);
+    break;
+  }
 }
 disable_download_popup();
 var b = document.getElementsByTagName('body')[0];
