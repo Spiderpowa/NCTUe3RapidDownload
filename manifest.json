@@ -1,13 +1,13 @@
 ﻿{
+  "manifest_version": 2,
   "name": "NCTU e3系統去除下載視窗",
-  "version": "1.5.0",
+  "version": "1.6.0",
   "description": "去除交通大學e3系統惱人的下載視窗",
   "icons" : {
     "16" : "icon16.png",
     "48" : "icon48.png",
     "128" : "icon128.png"
   },
-  "manifest_version": 2,
   "content_scripts": [
   {
     "matches" : [
@@ -15,7 +15,8 @@
       "http://e3.nctu.edu.tw/NCTU_EASY_E3P/LMS2/stu_course_index.aspx*"
     ],
 	"js" : ["jquery-2.0.2.min.js", "fastdownload.js"],
-	"all_frames" : true
+	"all_frames" : true,
+  "run_at": "document_end"
   },
   {
     "matches" : [
