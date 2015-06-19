@@ -1,7 +1,7 @@
 ﻿{
   "manifest_version": 2,
   "name": "NCTU e3系統去除下載視窗",
-  "version": "1.6.0",
+  "version": "1.6.1",
   "description": "去除交通大學e3系統惱人的下載視窗",
   "icons" : {
     "16" : "icon16.png",
@@ -11,19 +11,19 @@
   "content_scripts": [
   {
     "matches" : [
-      "http://e3.nctu.edu.tw/NCTU_EASY_E3P/LMS2/stu_materials_document_list.aspx*",
-      "http://e3.nctu.edu.tw/NCTU_EASY_E3P/LMS2/stu_course_index.aspx*"
+      "*://e3.nctu.edu.tw/NCTU_EASY_E3P/lms2/stu_materials_document_list.aspx*",
+      "*://e3.nctu.edu.tw/NCTU_Easy_E3P/lms2/stu_course_index.aspx*"
     ],
-	"js" : ["jquery-2.0.2.min.js", "fastdownload.js"],
-	"all_frames" : true,
-  "run_at": "document_end"
+    "js" : ["jquery-2.0.2.min.js", "fastdownload.js"],
+    "all_frames" : true,
+    "run_at": "document_end"
   },
   {
     "matches" : [
-      "http://e3.nctu.edu.tw/NCTU_Easy_E3P/LMS2/dialog_common_view_attach_media_list.aspx*"
+      "*://e3.nctu.edu.tw/NCTU_Easy_E3P/lms2/dialog_common_view_attach_media_list.aspx*"
     ],
-	"js" : ["jquery-2.0.2.min.js", "fastdownload.js", "popupfix.js"],
-	"all_frames" : true
+    "js" : ["jquery-2.0.2.min.js", "fastdownload.js", "popupfix.js"],
+    "all_frames" : true
   }
   ],
   "web_accessible_resources": [
