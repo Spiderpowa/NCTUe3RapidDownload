@@ -1,7 +1,7 @@
 ﻿{
   "manifest_version": 2,
   "name": "NCTU e3系統去除下載視窗",
-  "version": "1.6.1",
+  "version": "1.6.2",
   "description": "去除交通大學e3系統惱人的下載視窗",
   "icons" : {
     "16" : "icon16.png",
